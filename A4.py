@@ -1,21 +1,7 @@
 #   Implement a solution for a Constraint Satisfaction Problem using Branch and Bound and 
 #   Backtracking for n-queens problem or a graph coloring problem. 
 
-def is_safe(board, row, col, n):
-    # check column
-    for i in range(row):
-        if board[i] == col:
-            return False
-
-    # check left diagonal
-    for i in range(row):
-        if abs(board[i] - col) == abs(i - row):
-            return False
-
-    return True
-
-
-def solve(board, row, n):
+def solve(board, row, n, cols, diag1, diag2):
     if row == n:
         print("\nSolution Found:")
         print_board(board, n)
@@ -24,16 +10,26 @@ def solve(board, row, n):
     for col in range(n):
         print(f"Trying Queen at row {row}, col {col}")
 
-        if is_safe(board, row, col, n):
-            print(f"Placed at ({row}, {col})")
-            board[row] = col
+        # Branch and Bound check (O(1))
+        if cols[col] or diag1[row - col + n - 1] or diag2[row + col]:
+            continue
 
-            if solve(board, row + 1, n):
-                return True
+        # Place queen
+        print(f"Placed at ({row}, {col})")
+        board[row] = col
+        cols[col] = True
+        diag1[row - col + n - 1] = True
+        diag2[row + col] = True
 
-            # backtrack
-            print(f"Backtracking from ({row}, {col})")
-            board[row] = -1
+        if solve(board, row + 1, n, cols, diag1, diag2):
+            return True
+
+        # Backtracking
+        print(f"Backtracking from ({row}, {col})")
+        board[row] = -1
+        cols[col] = False
+        diag1[row - col + n - 1] = False
+        diag2[row + col] = False
 
     return False
 
@@ -49,14 +45,15 @@ def print_board(board, n):
 
 
 # -------- USER INPUT --------
-
 n = int(input("Enter number of queens: "))
 
 board = [-1] * n
+cols = [False] * n
+diag1 = [False] * (2 * n - 1)
+diag2 = [False] * (2 * n - 1)
 
 # -------- OUTPUT --------
-
-if not solve(board, 0, n):
+if not solve(board, 0, n, cols, diag1, diag2):
     print("No solution exists")
     
     
