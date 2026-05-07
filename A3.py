@@ -24,7 +24,7 @@ def prims():
     print("Enter adjacency matrix:")
     graph = []
     for i in range(n):
-        row = list(map(int, input().split()))
+        row = [int(x) for x in input().split()]
         graph.append(row)
 
     selected = [False] * n
