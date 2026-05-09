@@ -1,66 +1,42 @@
-from collections import deque
-
 def selectionSort():
     newArray = []
-    n = int(input("Enter no. of elements in array: "))
+    num = int(input("Enter no. of elements: "))
+    for i in range(num):
+        data = int(input(f"Enter Element {i+1}: "))
+        newArray.append(data)
     
-    for i in range(n):
-        num = int(input(f"Enter num {i+1}: "))
-        newArray.append(num)
-        
-    print("\nYour given array is: ", newArray)
-    print("\nSorting using selection sort algorithm!!")
-    
-    for i in range(n):
+    for i in range(num):
         min_index = i
-        for j in range(i+1, n):
-            if newArray[min_index] > newArray[j]:
+        for j in range(i+1, num):
+            if newArray[i] > newArray[j]:
                 min_index = j
         
-        newArray[min_index], newArray[i] = newArray[i], newArray[min_index]
+        newArray[i], newArray[min_index] = newArray[min_index], newArray[i]
+    print("Sorted Array: ", newArray)
     
-    print("\nSelection Sorting Process Completed!!")
-    print("\nYour sorted array is: ", newArray)
-    print("\nThankyou!!")
-
-
-def dfsAlgo(graph, node, visited):
+def dfs(graph, node, visited):
     if node not in visited:
         print(node, end=" ")
         visited.add(node)
         
         for neighbor in graph[node]:
-            dfsAlgo(graph, neighbor, visited)
+            dfs(graph, neighbor, visited)
             
-def rundfs():
+def bfs(graph, start):
+    visited = set()
+
+            
+def Main():
     graph = {}
-    n = int(input("Enter No. of nodes: "))
-    
-    for i in range(n):
-        node = input(f"Enter Vertex {i+1}: ")
-        neighbor = input(f"Enter neighbor of Vertex {i+1} (space-seperated): ").split()
-        print(neighbor)
-        graph[node] = neighbor
-        
-    start = input("Enter start node: ")
     visited = set()
     
-    dfsAlgo(graph, start, visited)
-    print("\n")
-    bfsAlgo(graph, start)
+    num = int(input("Enter no. of nodes: "))
+    for i in range(num):
+        data = input(f"Enter Node {i+1}: ")
+        neighbors = input(f"Enter neighbor of {i+1} space seperated: ").split()
+        graph[data] = neighbors
+
+    start = input("Enter Start node: ")
     
-def bfsAlgo(graph, start):
-    visited = set()
-    queue = deque([start])
-    visited.add(start)
+    dfs(graph, start, visited)
     
-    while queue:
-        node = queue.popleft()
-        print(node, end=" ")
-        
-        for neighbor in graph[node]:
-            if neighbor not in visited:
-                visited.add(neighbor)
-                queue.append(neighbor)
-    
-rundfs()
