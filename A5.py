@@ -1,72 +1,38 @@
 #   Develop an elementary chatbot for any suitable customer interaction application.
 
-def chatbot():
-    print("Chatbot: Hello! I can help you with investment suggestions.")
-    print("Type 'exit' anytime to stop.\n")
-
+def restaurant_chatbot():
+    print("Welcome to the Keshav's Restaurant!")
+    print("You can ask me about the menu, cost, contact details or reservations!")
+    
     while True:
-        user = input("You: ").lower()
+        user_input = input("\nYou: ").lower()
+        
+        if "menu" in user_input:
+            print("Chatbot: Our menu includes pasta, pizza, salads, and desserts.")
+        
+        elif "cost" in user_input or "price" in user_input or "how much" in user_input:
+            print("Chatbot: The average cost per person is around 400 rupees.")
+        
+        elif "contact" in user_input or "phone" in user_input:
+            print("Chatbot: You can contact us at +91-1234567890")
+        
+        elif "reservation" in user_input or "book" in user_input:
+            print("Chatbot: To make a reservation, please call us at +91-1234567890 or visit our website at https://kkrestraunts.io")
+        
+        elif "hours" in user_input or "timing" in user_input:
+            print("Chatbot: We are open from 11 AM to 10 PM, Monday to Sunday.")
+        
+        elif "how are you" in user_input or "how's it going" in user_input or "sup" in user_input:
+            print("Chatbot: I'm just a bot, but I'm here to help you! How can I assist you today?")
+        
+        elif "meow" in user_input:
+            print("Meow meow meow!")
 
-        if user == "exit":
-            print("Chatbot: Thank you! Happy investing")
+        elif "exit" in user_input or "quit" in user_input:
+            print("Chatbot: Thank you for chatting with us! Have a great day!")
             break
-
-        elif "invest" in user or "suggest" in user:
-            print("Chatbot: Sure! I need some details.")
-
-            amount = int(input("Enter amount: "))
-            risk = input("Risk (low/medium/high): ").lower()
-            duration = input("Duration (short/long): ").lower()
-
-            print("\nBased on your inputs, I suggest:")
-
-            # Decision logic
-            if risk == "low":
-                if duration == "short":
-                    print("- Savings Account\n- Fixed Deposit")
-                else:
-                    print("- Fixed Deposit\n- Government Bonds\n- PPF")
-
-            elif risk == "medium":
-                if duration == "short":
-                    print("- Debt Mutual Funds\n- Hybrid Funds")
-                else:
-                    print("- Mutual Funds\n- Index Funds\n- SIP")
-
-            elif risk == "high":
-                if duration == "short":
-                    print("- Intraday Trading (risky)")
-                else:
-                    print("- Stocks\n- Equity Mutual Funds\n- Crypto")
-
-            if amount > 100000:
-                print("- Real Estate (optional)")
-
-            print("\nChatbot: You can ask again or type 'exit'.")
-
-        elif "hi" in user or "hello" in user:
-            print("Chatbot: Hello! Ask me about investment suggestions.")
-
+        
         else:
-            print("Chatbot: I can help with investment suggestions. Try typing 'invest'.")
+            print("Chatbot: I'm sorry, I didn't understand that. Can you ask something else?")
 
-
-# Run chatbot
-chatbot()
-
-
-# Example
-
-""" 
-You: hi
-Bot: Hello! How can I help you?
-
-You: what is delivery time
-Bot: Delivery usually takes 3-5 days.
-
-You: payment options
-Bot: We accept UPI, cards, and net banking.
-
-You: bye
-Bot: Thank you! Have a nice day 
-"""
+restaurant_chatbot()
