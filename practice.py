@@ -137,4 +137,59 @@ def nQueenMain():
     if not solve(board, 0, n, cols, diag1, diag2):
         print("No Solution Found")
         
-nQueenMain()
+def astar():
+    goal = [
+        [1,2,3],
+        [4,5,6],
+        [7,8,0]
+    ]
+    
+    def heuristic(state):
+        count = 0
+        for i in range(3):
+            for j in range(3):
+                if state[i][j] != 0 and state[i][j] != goal[i][j]:
+                    count += 1
+        return count
+    
+    def find_zero(state):
+        for i in range(3):
+            for j in range(3):
+                if state[i][j] == 0:
+                    return i, j
+
+    def getNeighbors(state):
+        neighbors = []
+        x, y = find_zero(state)
+        moves = [(0,-1), (0,1), (1,0), (-1,0)]
+        
+        for dx, dy in moves:
+            nx, ny = x + dx, y + dy
+            if 0 <= nx < 3 and 0 <= ny < 3:
+                new = [row[:] for row in state]
+                new[x][y], new[nx][ny] = new[nx][ny], new[x][y]
+                neighbors.append(new)
+                
+        return neighbors
+    
+    def main():
+        print("Enter Initial State: ")
+        start = []
+        
+        for i in range(3):
+            row = [int(x) for x in input().split()]
+            start.append(row)
+            
+        path = astarSolve(start)
+        
+        if path:
+            print("Solution Found!!")
+        else:
+            print("No Solution Found!!")
+            
+            
+        
+        
+        
+    
+    

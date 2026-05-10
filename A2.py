@@ -51,7 +51,7 @@ def a_star(start):
         for row in current:
             print(row)
 
-        print("g(n) =", g[str(current)])
+        print("\ng(n) =", g[str(current)])
         print("h(n) =", heuristic(current))
         print("f(n) =", g[str(current)] + heuristic(current))
 
@@ -83,7 +83,7 @@ print("Enter initial state (use 0 for blank):")
 start = []
 
 for i in range(3):
-    row = list(map(int, input().split()))
+    row = [int(x) for x in input().split()]
     start.append(row)
 
 # -------- OUTPUT --------
@@ -91,13 +91,9 @@ for i in range(3):
 path = a_star(start)
 
 if path:
-    print("\nFinal Path:")
-    for step in path:
-        for row in step:
-            print(row)
-        print()
+    print("\nSolution Found")
 else:
-    print("No solution found")
+    print("\nNo solution found")
     
     
 # Example
